@@ -1,10 +1,10 @@
-# creating elastic ip to Network load balancer
+# creates elastic ip to Network load balancer
 resource "aws_eip" "eip_nlb" {
   tags    = {
     Name  = "test-network-lb-eip"
   }
 }
-# creating Network load balancer
+# creates Network load balancer
 resource "aws_lb" "demo" {
   name               = "demo-elb"
   load_balancer_type = "network"
@@ -14,7 +14,7 @@ resource "aws_lb" "demo" {
     allocation_id = aws_eip.eip_nlb.id
   }
 }
-# adding load balancer listener
+# add load balancer listener
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.demo.arn
   port              = "443"
@@ -27,7 +27,7 @@ resource "aws_lb_listener" "front_end" {
 
     }
 }
-# creating targetgroup for load balancer
+# creates targetgroup for load balancer
 resource "aws_lb_target_group" "webserver-tg" {
   name     = "demo-lb-tg"
   port     = 80
@@ -35,7 +35,7 @@ resource "aws_lb_target_group" "webserver-tg" {
   target_type="instance"
   vpc_id   = aws_vpc.demo.id
 }
-# attaching ec2 instace to Network load balancer
+# attaches ec2 instace to Network load balancer
 resource "aws_lb_target_group_attachment" "ec2attach" {
   target_group_arn = aws_lb_target_group.webserver-tg.arn
   target_id        = aws_instance.webserver.id
