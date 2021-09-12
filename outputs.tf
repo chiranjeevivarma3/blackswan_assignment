@@ -5,12 +5,12 @@ output "rds_hostname" {
 output "rds_username" {
   description = "RDS instance root username"
   value       = aws_db_instance.mysql.username
-  #sensitive   = true
+  sensitive   = true
 }
 output "rds_password" {
   description = "RDS instance password"
   value       = aws_db_instance.mysql.password
-  #sensitive   = true
+  sensitive   = true
 }
 output "elb_publicip" {
   description = "The Public IP name of the ELB"

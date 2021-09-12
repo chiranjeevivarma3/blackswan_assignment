@@ -21,7 +21,7 @@ resource "aws_subnet" "private" {
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.demo.id
   cidr_block = "10.0.3.0/24"
-  availability_zone = "us-east-1c"
+  availability_zone = "us-east-1a"
   map_public_ip_on_launch = true
   tags = {
     Name = "demo-public-subnet-3"
