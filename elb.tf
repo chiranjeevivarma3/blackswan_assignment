@@ -1,7 +1,7 @@
 # creates elastic ip to Network load balancer
 resource "aws_eip" "eip_nlb" {
   tags    = {
-    Name  = "test-network-lb-eip"
+    Name  = "demo-network-lb-eip"
   }
 }
 # creates Network load balancer
@@ -9,6 +9,7 @@ resource "aws_lb" "demo" {
   name               = "demo-elb"
   load_balancer_type = "network"
   internal           = false
+  idle_timeout       =  60
   subnet_mapping {
     subnet_id     = aws_subnet.public.id
     allocation_id = aws_eip.eip_nlb.id
